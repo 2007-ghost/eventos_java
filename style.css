@@ -53,12 +53,30 @@ section ul, section ol {
 }
 
 pre {
+  /* Fondo y color de texto */
+  background: #282c34; 
+  color: #abb2bf;     
+
+  /* Espaciado y bordes */
+  padding: 15px;
+  border-radius: 8px; 
+  border: 1px solid #3e4451; 
+  overflow-x: auto; 
+  margin: 15px 0;
+  
+  /* Tipo de fuente */
+  font-family: 'Fira Code', 'Roboto Mono', monospace; 
+  font-size: 0.9em;
+  line-height: 1.6;
+  white-space: pre-wrap; 
+}
+/* pre {
   background: #f4f4f4;
   padding: 10px;
   border-left: 3px solid #4e73df;
   overflow-x: auto;
   margin: 10px 0;
-}
+} */
 
 /* Tablas */
 table {
