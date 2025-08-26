@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria</title>
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0072ff;
+            color: #fff;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            gap: 10px;
+        }
+
+        .card {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #00c6ff;
+            font-size: 2em;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .hidden {
+            background: #555;
+            color: transparent;
+            cursor: pointer;
+        }
+
+        #status {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <div class="board" id="board"></div>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const board = document.getElementById("board");
+        const statusDiv = document.getElementById("status");
+
+        // Pares de cartas (duplicamos y mezclamos)
+        let cards = ["🍎", "🍎", "🍌", "🍌", "🍇", "🍇", "🍒", "🍒"];
+        cards = cards.sort(() => Math.random() - 0.5);
+
+        let firstCard = null;
+        let secondCard = null;
+        let lock = false;
+        let matches = 0;
+
+        // Crear las cartas en el tablero
+        cards.forEach((symbol, index) => {
+            const card = document.createElement("div");
+            card.classList.add("card", "hidden");
+            card.dataset.symbol = symbol;
+            card.dataset.index = index;
+            card.textContent = symbol;
+            board.appendChild(card);
+
+            card.addEventListener("click", () => {
+                if (lock || !card.classList.contains("hidden")) return;
+
+                card.classList.remove("hidden");
+
+                if (!firstCard) {
+                    firstCard = card;
+                } else {
+                    secondCard = card;
+                    lock = true;
+
+                    if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
+                        matches++;
+                        firstCard = null;
+                        secondCard = null;
+                        lock = false;
+                        if (matches === cards.length / 2) {
+                            statusDiv.textContent = "¡Ganaste! 🎉";
+                        }
+                    } else {
+                        setTimeout(() => {
+                            firstCard.classList.add("hidden");
+                            secondCard.classList.add("hidden");
+                            firstCard = null;
+                            secondCard = null;
+                            lock = false;
+                        }, 800);
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

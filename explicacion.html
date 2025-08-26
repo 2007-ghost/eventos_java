@@ -70,10 +70,85 @@
 <body>
 
   <h1>Ejercicios de Eventos en JavaScript (con explicaciones)</h1>
+  <!-- ============ EJERCICIO 1: ROMPECABEZAS 3x3 (TECLADO) ============ -->
+  <section class="section" id="ej2">
+    <h2>Ejercicio 1: Rompecabezas 3×3 (evento <code>keydown</code>)</h2>
+    <p style="text-align:center;margin:0 0 10px">
+      Usa ⬆️ ⬇️ ⬅️ ➡️ para mover el <em>espacio vacío</em>. Orden objetivo: 1–8 y el vacío al final.
+    </p>
+    <div class="board" id="puzzle"></div>
 
-  <!-- ================= EJERCICIO 1: TRIQUI (CLICK) ================= -->
+    <div class="explanation">
+      <h3>¿Qué vas a aprender?</h3>
+      <p>
+        A escuchar el <strong>teclado</strong> con <code>addEventListener("keydown", ...)</code>, a representar
+        el estado del puzzle en un arreglo, a renderizar la grilla desde ese estado y a mover
+        el espacio vacío intercambiándolo con una ficha <em>adyacente</em> según la flecha pulsada.
+      </p>
+
+      <h3>1) Estado del juego y barajado inicial</h3>
+      <p>Representamos el tablero como un arreglo de 9 posiciones; <code>""</code> es el vacío:</p>
+      <pre><code>const puzzle = document.getElementById("puzzle");
+let pieces = [1,2,3,4,5,6,7,8,""]; // 8 fichas + 1 vacío
+
+// Pequeño barajado simple para demo (no garantiza resolubilidad matemática)
+function shuffle(arr) {
+  arr.sort(() => Math.random() - 0.5);
+}
+shuffle(pieces);
+</code></pre>
+
+      <h3>2) Renderizar el tablero desde el arreglo</h3>
+      <p>Cada valor del arreglo se vuelca a una <code>.puzzle-cell</code>:</p>
+      <pre><code>function renderPuzzle() {
+  puzzle.innerHTML = "";
+  pieces.forEach(p =&gt; {
+    const cell = document.createElement("div");
+    cell.classList.add("puzzle-cell");
+    cell.textContent = p; // cadena vacía si es el hueco
+    puzzle.appendChild(cell);
+  });
+}
+renderPuzzle();
+</code></pre>
+
+      <h3>3) Escuchar las teclas de flecha</h3>
+      <p>Dependiendo de la flecha, intentamos mover el vacío intercambiándolo con la ficha vecina:</p>
+      <pre><code>document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowUp")    mover("up");
+  if (e.key === "ArrowDown")  mover("down");
+  if (e.key === "ArrowLeft")  mover("left");
+  if (e.key === "ArrowRight") mover("right");
+});
+</code></pre>
+
+      <h3>4) Reglas de movimiento (adyacencia y límites)</h3>
+      <p>
+        Calculamos índice del vacío, su fila y columna. Solo hay movimiento si existe
+        vecino válido en esa dirección (nos cuidamos de no “saltar” de fila a fila).
+      </p>
+      <pre><code>function mover(direction) {
+  const emptyIndex = pieces.indexOf("");
+  const row = Math.floor(emptyIndex / 3);
+  const col = emptyIndex % 3;
+
+  let swapIndex = null;
+  if (direction === "up"    && row &lt; 2) swapIndex = emptyIndex + 3; // subir hueco = traer ficha de abajo
+  if (direction === "down"  && row &gt; 0) swapIndex = emptyIndex - 3;
+  if (direction === "left"  && col &lt; 2) swapIndex = emptyIndex + 1;
+  if (direction === "right" && col &gt; 0) swapIndex = emptyIndex - 1;
+
+  if (swapIndex !== null) {
+    [pieces[emptyIndex], pieces[swapIndex]] = [pieces[swapIndex], pieces[emptyIndex]];
+    renderPuzzle();
+  }
+}
+</code></pre>
+    </div>
+  </section>
+  <!-- ================= EJERCICIO 2: TRIQUI (CLICK) ================= -->
   <section class="section" id="ej1">
-    <h2>Ejercicio 1: Triqui (evento <code>click</code>)</h2>
+    <h2>Ejercicio 2: Triqui (evento <code>click</code>)</h2>
     <div class="board" id="board"></div>
     <div class="winner" id="winner"></div>
 
@@ -148,151 +223,6 @@ for (let i = 0; i &lt; 9; i++) {
 </code></pre>
     </div>
   </section>
-
-  <!-- ============ EJERCICIO 2: ROMPECABEZAS 3x3 (TECLADO) ============ -->
-  <section class="section" id="ej2">
-    <h2>Ejercicio 2: Rompecabezas 3×3 (evento <code>keydown</code>)</h2>
-    <p style="text-align:center;margin:0 0 10px">
-      Usa ⬆️ ⬇️ ⬅️ ➡️ para mover el <em>espacio vacío</em>. Orden objetivo: 1–8 y el vacío al final.
-    </p>
-    <div class="board" id="puzzle"></div>
-
-    <div class="explanation">
-      <h3>¿Qué vas a aprender?</h3>
-      <p>
-        A escuchar el <strong>teclado</strong> con <code>addEventListener("keydown", ...)</code>, a representar
-        el estado del puzzle en un arreglo, a renderizar la grilla desde ese estado y a mover
-        el espacio vacío intercambiándolo con una ficha <em>adyacente</em> según la flecha pulsada.
-      </p>
-
-      <h3>1) Estado del juego y barajado inicial</h3>
-      <p>Representamos el tablero como un arreglo de 9 posiciones; <code>""</code> es el vacío:</p>
-      <pre><code>const puzzle = document.getElementById("puzzle");
-let pieces = [1,2,3,4,5,6,7,8,""]; // 8 fichas + 1 vacío
-
-// Pequeño barajado simple para demo (no garantiza resolubilidad matemática)
-function shuffle(arr) {
-  arr.sort(() => Math.random() - 0.5);
-}
-shuffle(pieces);
-</code></pre>
-
-      <h3>2) Renderizar el tablero desde el arreglo</h3>
-      <p>Cada valor del arreglo se vuelca a una <code>.puzzle-cell</code>:</p>
-      <pre><code>function renderPuzzle() {
-  puzzle.innerHTML = "";
-  pieces.forEach(p =&gt; {
-    const cell = document.createElement("div");
-    cell.classList.add("puzzle-cell");
-    cell.textContent = p; // cadena vacía si es el hueco
-    puzzle.appendChild(cell);
-  });
-}
-renderPuzzle();
-</code></pre>
-
-      <h3>3) Escuchar las teclas de flecha</h3>
-      <p>Dependiendo de la flecha, intentamos mover el vacío intercambiándolo con la ficha vecina:</p>
-      <pre><code>document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowUp")    mover("up");
-  if (e.key === "ArrowDown")  mover("down");
-  if (e.key === "ArrowLeft")  mover("left");
-  if (e.key === "ArrowRight") mover("right");
-});
-</code></pre>
-
-      <h3>4) Reglas de movimiento (adyacencia y límites)</h3>
-      <p>
-        Calculamos índice del vacío, su fila y columna. Solo hay movimiento si existe
-        vecino válido en esa dirección (nos cuidamos de no “saltar” de fila a fila).
-      </p>
-      <pre><code>function mover(direction) {
-  const emptyIndex = pieces.indexOf("");
-  const row = Math.floor(emptyIndex / 3);
-  const col = emptyIndex % 3;
-
-  let swapIndex = null;
-  if (direction === "up"    && row &lt; 2) swapIndex = emptyIndex + 3; // subir hueco = traer ficha de abajo
-  if (direction === "down"  && row &gt; 0) swapIndex = emptyIndex - 3;
-  if (direction === "left"  && col &lt; 2) swapIndex = emptyIndex + 1;
-  if (direction === "right" && col &gt; 0) swapIndex = emptyIndex - 1;
-
-  if (swapIndex !== null) {
-    [pieces[emptyIndex], pieces[swapIndex]] = [pieces[swapIndex], pieces[emptyIndex]];
-    renderPuzzle();
-  }
-}
-</code></pre>
-    </div>
-  </section>
-
-  <!-- ============== EJERCICIO 3: FLECHAS DE SCROLL (SCROLL) ============== -->
-  <section class="section" id="ej3" style="min-height:1200px">
-    <h2>Ejercicio 3: Flechas de dirección (evento <code>scroll</code>)</h2>
-    <p>
-      Desplázate por la página: si bajas verás ⬇️, si subes aparecerá ⬆️. Las flechas se desvanecen
-      automáticamente después de un breve instante sin movimiento.
-    </p>
-
-    <div class="explanation">
-      <h3>¿Qué vas a aprender?</h3>
-      <p>
-        A capturar el evento <code>scroll</code> de la ventana, a comparar la posición actual con la anterior
-        y a mostrar/ocultar indicadores visuales según la dirección del desplazamiento.
-      </p>
-
-      <h3>1) Marcado HTML para las flechas</h3>
-      <p>En la página hay un contenedor fijo con dos flechas:</p>
-      <pre><code>&lt;div class="scroll-arrows" id="scrollArrows"&gt;
-  &lt;div class="arrow" id="upArrow"&gt;⬆️&lt;/div&gt;
-  &lt;div class="arrow" id="downArrow"&gt;⬇️&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-      <h3>2) Variables de estado</h3>
-      <p>Mantenemos el último <code>scrollY</code> visto y un temporizador para ocultar:</p>
-      <pre><code>const scrollArrows = document.getElementById("scrollArrows");
-const upArrow = document.getElementById("upArrow");
-const downArrow = document.getElementById("downArrow");
-let lastScroll = 0;   // posición previa
-let timeout;          // para ocultar con retraso
-</code></pre>
-
-      <h3>3) Función para mostrar la flecha adecuada</h3>
-      <p>
-        Activamos el contenedor, decidimos cuál flecha enseñar y programamos su ocultamiento
-        tras 1.5 segundos sin nuevos eventos de scroll.
-      </p>
-      <pre><code>function mostrarFlecha(direction) {
-  scrollArrows.style.opacity = 1;
-  upArrow.style.display   = direction === "up"   ? "grid" : "none";
-  downArrow.style.display = direction === "down" ? "grid" : "none";
-
-  clearTimeout(timeout);
-  timeout = setTimeout(() => { scrollArrows.style.opacity = 0; }, 1500);
-}
-</code></pre>
-
-      <h3>4) Escuchar el evento <code>scroll</code> en <code>window</code></h3>
-      <p>Si la posición actual es mayor que la anterior, vamos hacia abajo; si no, hacia arriba:</p>
-      <pre><code>window.addEventListener("scroll", () => {
-  if (window.scrollY > lastScroll) {
-    mostrarFlecha("down");
-  } else {
-    mostrarFlecha("up");
-  }
-  lastScroll = window.scrollY;
-});
-</code></pre>
-    </div>
-  </section>
-
-  <!-- Indicadores de scroll (fijos en toda la página) -->
-  <div class="scroll-arrows" id="scrollArrows" aria-hidden="true">
-    <div class="arrow" id="upArrow">⬆️</div>
-    <div class="arrow" id="downArrow">⬇️</div>
-  </div>
-
   <script>
     /* ===== EJERCICIO 1: TRIQUI ===== */
     const board = document.getElementById("board");
@@ -378,30 +308,6 @@ let timeout;          // para ocultar con retraso
         renderPuzzle();
       }
     }
-
-    /* ===== EJERCICIO 3: FLECHAS DE SCROLL EN TODA LA PÁGINA ===== */
-    const scrollArrows = document.getElementById("scrollArrows");
-    const upArrow = document.getElementById("upArrow");
-    const downArrow = document.getElementById("downArrow");
-    let lastScroll = 0;
-    let timeout;
-
-    function mostrarFlecha(direction) {
-      scrollArrows.style.opacity = 1;
-      upArrow.style.display   = direction === "up"   ? "grid" : "none";
-      downArrow.style.display = direction === "down" ? "grid" : "none";
-      clearTimeout(timeout);
-      timeout = setTimeout(() => { scrollArrows.style.opacity = 0; }, 1500);
-    }
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > lastScroll) {
-        mostrarFlecha("down");
-      } else {
-        mostrarFlecha("up");
-      }
-      lastScroll = window.scrollY;
-    });
   </script>
 </body>
 </html>
