@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Interactiva de Eventos en JavaScript</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f4f4f9;
+      color: #333;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #222;
+    }
+    section {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 800px;
+    }
+    .demo {
+      margin-top: 10px;
+      padding: 15px;
+      background: #eef;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+    input, button, textarea, select {
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .dark {
+      background: #222;
+      color: white;
+    }
+    video {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 Guía Interactiva de Eventos en JavaScript</h1>
+  <p>Explora cada sección, lee la explicación y prueba el ejemplo interactivo. Todos los eventos usan <code>addEventListener</code>.</p>
+
+  <!-- EVENTOS DE RATÓN -->
+  <section>
+    <h2>🐭 Eventos de Ratón</h2>
+    <p><b>click:</b> Se activa al hacer un clic.</p>
+    <div class="demo" id="clickDemo">Haz clic aquí</div>
+
+    <p><b>dblclick:</b> Se activa con doble clic.</p>
+    <div class="demo" id="dblclickDemo">Haz doble clic aquí</div>
+
+    <p><b>mouseover / mouseout:</b> Cuando el puntero entra o sale de un elemento.</p>
+    <div class="demo" id="hoverDemo">Pasa el mouse por encima</div>
+
+    <p><b>mousemove:</b> Detecta el movimiento del mouse.</p>
+    <div class="demo" id="moveDemo">Mueve el mouse dentro</div>
+    <p id="coords"></p>
+
+    <p><b>contextmenu:</b> Detecta clic derecho.</p>
+    <div class="demo" id="contextDemo">Haz clic derecho aquí</div>
+  </section>
+
+  <!-- EVENTOS DE TECLADO -->
+  <section>
+    <h2>⌨️ Eventos de Teclado</h2>
+    <p><b>keydown:</b> Se activa al presionar una tecla.</p>
+    <input type="text" id="keydownInput" placeholder="Escribe algo">
+
+    <p><b>keyup:</b> Se activa al soltar una tecla.</p>
+    <input type="text" id="keyupInput" placeholder="Escribe y suelta">
+
+    <p><b>keypress:</b> Detecta caracteres (menos usado actualmente).</p>
+    <input type="text" id="keypressInput" placeholder="Escribe aquí">
+  </section>
+
+  <!-- EVENTOS DE FORMULARIO -->
+  <section>
+    <h2>📋 Eventos de Formulario</h2>
+    <form id="formDemo">
+      <input type="text" id="focusInput" placeholder="Haz focus aquí">
+      <input type="text" id="blurInput" placeholder="Pierde focus aquí">
+      <select id="changeSelect">
+        <option value="">Selecciona</option>
+        <option>Opción 1</option>
+        <option>Opción 2</option>
+      </select>
+      <input type="text" id="inputField" placeholder="Escribe para probar input">
+      <button type="submit">Enviar</button>
+      <button type="reset">Resetear</button>
+    </form>
+    <p id="formMsg"></p>
+  </section>
+
+  <!-- EVENTOS DE VENTANA -->
+
+  <!-- EVENTOS MULTIMEDIA -->
+  <section>
+    <h2>🎵 Eventos Multimedia</h2>
+    <video id="videoDemo" controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <p id="videoMsg"></p>
+  </section>
+
+  <!-- EVENTOS DE PORTAPAPELES -->
+  <section>
+    <h2>📑 Eventos de Portapapeles</h2>
+    <textarea id="clipboardArea" rows="3" cols="40">Prueba copiar, cortar o pegar aquí</textarea>
+    <p id="clipboardMsg"></p>
+  </section>
+
+  <script>
+    // RATÓN
+    document.getElementById("clickDemo").addEventListener("click", ()=>alert("¡Hiciste clic!"));
+    document.getElementById("dblclickDemo").addEventListener("dblclick", ()=>alert("¡Doble clic detectado!"));
+    const hover = document.getElementById("hoverDemo");
+    hover.addEventListener("mouseover", ()=>hover.style.background="lightgreen");
+    hover.addEventListener("mouseout", ()=>hover.style.background="#eef");
+    document.getElementById("moveDemo").addEventListener("mousemove",(e)=>{
+      document.getElementById("coords").textContent = `Coordenadas: X=${e.offsetX}, Y=${e.offsetY}`;
+    });
+    document.getElementById("contextDemo").addEventListener("contextmenu",(e)=>{
+      e.preventDefault();
+      alert("¡Clic derecho bloqueado!");
+    });
+
+    // TECLADO
+    document.getElementById("keydownInput").addEventListener("keydown",()=>alert("Tecla presionada"));
+    document.getElementById("keyupInput").addEventListener("keyup",()=>alert("Tecla soltada"));
+    document.getElementById("keypressInput").addEventListener("keypress",()=>alert("Tecla registrada"));
+
+    // FORMULARIO
+    document.getElementById("focusInput").addEventListener("focus",()=>alert("Input en focus"));
+    document.getElementById("blurInput").addEventListener("blur",()=>alert("Input perdió el foco"));
+    document.getElementById("changeSelect").addEventListener("change",(e)=>{
+      document.getElementById("formMsg").textContent = "Seleccionaste: "+e.target.value;
+    });
+    document.getElementById("inputField").addEventListener("input",(e)=>{
+      document.getElementById("formMsg").textContent = "Escribiendo: "+e.target.value;
+    });
+    document.getElementById("formDemo").addEventListener("submit",(e)=>{
+      e.preventDefault();
+      document.getElementById("formMsg").textContent = "Formulario enviado correctamente";
+    });
+    document.getElementById("formDemo").addEventListener("reset",()=>{
+      document.getElementById("formMsg").textContent = "Formulario reseteado";
+    });
+    // MULTIMEDIA
+    const video = document.getElementById("videoDemo");
+    video.addEventListener("play",()=>document.getElementById("videoMsg").textContent="Video en reproducción...");
+    video.addEventListener("pause",()=>document.getElementById("videoMsg").textContent="Video en pausa.");
+    video.addEventListener("ended",()=>document.getElementById("videoMsg").textContent="Video finalizado.");
+
+    // PORTAPAPELES
+    const area = document.getElementById("clipboardArea");
+    area.addEventListener("copy",()=>document.getElementById("clipboardMsg").textContent="¡Texto copiado!");
+    area.addEventListener("cut",()=>document.getElementById("clipboardMsg").textContent="¡Texto cortado!");
+    area.addEventListener("paste",()=>document.getElementById("clipboardMsg").textContent="¡Texto pegado!");
+  </script>
+</body>
+</html>

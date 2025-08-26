@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Eventos en JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Guía Completa de Eventos en JavaScript</h1>
+    <p>Aprendizaje paso a paso con actividades, ejercicios y examen final.</p>
+     <a href="ejemplos.html">ejemplos</a>
+     <a href="practica.html">practica</a>
+     <a href="ensayo.html">ensayo</a>
+  </header>
+
+  <main>
+    <!-- Introducción -->
+    <section class="teoria">
+      <h2>📌 ¿Qué es un Evento en JavaScript?</h2>
+      <p>
+        Un evento es cualquier interacción del usuario o del sistema con la página web, 
+        como un clic, presionar una tecla, mover el ratón o enviar un formulario. 
+        Con JavaScript podemos "escuchar" y responder a esos eventos.
+      </p>
+    </section>
+
+    <!-- Tipos de eventos -->
+    <section class="teoria">
+      <h2>📌 Tipos de Eventos</h2>
+      <ul>
+        <li><b>Eventos de ratón:</b> <code>click</code>, <code>dblclick</code>, <code>mouseover</code>, <code>mouseout</code>, <code>mousemove</code></li>
+        <li><b>Eventos de teclado:</b> <code>keydown</code>, <code>keyup</code>, <code>keypress</code></li>
+        <li><b>Eventos de formulario:</b> <code>submit</code>, <code>change</code>, <code>input</code>, <code>blur</code>, <code>focus</code></li>
+        <li><b>Eventos de carga:</b> <code>load</code>, <code>DOMContentLoaded</code></li>
+        <li><b>Eventos de ventana:</b> <code>resize</code>, <code>scroll</code></li>
+      </ul>
+    </section>
+
+    <!-- addEventListener -->
+    <section class="teoria">
+      <h2>📌 Uso de <code>addEventListener</code></h2>
+      <p>
+        El método <code>addEventListener</code> permite asociar múltiples funciones a un mismo evento 
+        sin sobrescribir otras. Su sintaxis es:
+      </p>
+      <pre><code>element.addEventListener("evento", function() {
+  // Código a ejecutar cuando ocurra el evento
+});</code></pre>
+      <p>
+        Ejemplo:
+      </p>
+      <pre><code>document.getElementById("btn").addEventListener("click", () => {
+  alert("Hiciste clic en el botón");
+});</code></pre>
+    </section>
+
+    <!-- Actividades -->
+    <section class="actividad">
+      <h2>📝 Actividades de Práctica</h2>
+      <ol>
+        <li>Crea un botón que cambie el color de fondo al hacer clic.</li>
+        <li>Muestra un mensaje en consola cuando el usuario presione una tecla.</li>
+        <li>Haz un formulario con nombre y correo que valide si los campos están vacíos antes de enviar.</li>
+        <li>Crea un div que cambie de color al pasar el ratón encima y regrese al original al quitarlo.</li>
+        <li>Implementa un contador que aumente al presionar un botón y disminuya al presionar otro.</li>
+      </ol>
+    </section>
+
+    <!-- Ejercicios de práctica -->
+    <section class="ejercicios">
+      <h2>⚡ Ejercicios para reforzar</h2>
+      <ul>
+        <li>Detecta cuándo el usuario hace doble clic sobre una imagen.</li>
+        <li>Haz que al escribir en un input, se muestre en tiempo real el texto en un párrafo.</li>
+        <li>Crea un botón que, al hacer clic, agregue un nuevo ítem a una lista.</li>
+        <li>Detecta cuándo la ventana cambia de tamaño y muestra las nuevas dimensiones.</li>
+      </ul>
+    </section>
+
+    <!-- Examen Final -->
+    <section class="examen">
+      <h2>📑 Examen Final Integrador</h2>
+
+      <h3>Parte A – Preguntas Teóricas</h3>
+      <ol>
+        <li>Explica qué es un evento en JavaScript y por qué es importante.</li>
+        <li>¿Qué ventajas tiene <code>addEventListener</code> frente a usar <code>onclick</code> directamente?</li>
+        <li>Menciona tres eventos del teclado y en qué situación los usarías.</li>
+        <li>¿Cuál es la diferencia entre <code>onchange</code> y <code>oninput</code>?</li>
+        <li>¿Qué significa “escuchar un evento” en JavaScript?</li>
+      </ol>
+
+      <h3>Parte B – Ejercicio Práctico</h3>
+      <p>
+        Crea una mini aplicación que cumpla con:
+      </p>
+      <ul>
+        <li><b>Encabezado dinámico:</b> Cambia el texto cuando el usuario pasa y quita el mouse.</li>
+        <li><b>Contador con teclado:</b> Aumenta con flecha arriba, disminuye con flecha abajo.</li>
+        <li><b>Formulario validado:</b> Nombre obligatorio y edad mayor a 0.</li>
+        <li><b>Cambio de tema:</b> Botón que alterne entre modo claro y oscuro.</li>
+      </ul>
+
+      <h3>📊 Rúbrica de Evaluación</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Criterio</th>
+            <th>Excelente (5)</th>
+            <th>Bueno (4)</th>
+            <th>Aceptable (3)</th>
+            <th>Insuficiente (1-2)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Eventos de mouse</td>
+            <td>Correctos y creativos</td>
+            <td>Funciona con detalles</td>
+            <td>Funciona parcialmente</td>
+            <td>No implementa</td>
+          </tr>
+          <tr>
+            <td>Eventos de teclado</td>
+            <td>Correctos y útiles</td>
+            <td>Funciona con errores leves</td>
+            <td>Limitado</td>
+            <td>No funciona</td>
+          </tr>
+          <tr>
+            <td>Eventos de formulario</td>
+            <td>Validación completa</td>
+            <td>Aceptable</td>
+            <td>Parcial</td>
+            <td>Sin validación</td>
+          </tr>
+          <tr>
+            <td>Uso de addEventListener</td>
+            <td>Usado en todos los casos</td>
+            <td>Usado en la mayoría</td>
+            <td>Pocos casos</td>
+            <td>No usado</td>
+          </tr>
+          <tr>
+            <td>Estilo y presentación</td>
+            <td>Bien organizado</td>
+            <td>Presentable</td>
+            <td>Básico</td>
+            <td>Desordenado</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Guía creada para aprender <b>Eventos en JavaScript</b> – Con teoría, práctica y evaluación.</p>
+  </footer>
+</body>
+</html>
