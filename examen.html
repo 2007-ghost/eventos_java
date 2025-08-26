@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Final - Cuadro Sorpresa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .cell {
+            background: #1e293b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .cell:hover {
+            transform: scale(1.05);
+        }
+
+        #mensaje {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Examen Final — Cuadro Sorpresa</h1>
+    <p>👉 Pasa el mouse sobre un cuadro para cambiar su color.<br>
+        👉 Haz clic en un cuadro para que aparezca un número aleatorio.<br>
+        👉 Presiona la tecla <b>R</b> para reiniciar el tablero.</p>
+
+    <div class="grid" id="tablero">
+        <!-- 9 cuadros -->
+    </div>
+
+    <div id="mensaje"></div>
+
+    <script>
+        const tablero = document.getElementById("tablero");
+        const mensaje = document.getElementById("mensaje");
+
+        // Crear las 9 celdas
+        for (let i = 0; i < 9; i++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+
+            // Evento mouseover → cambia color
+            cell.addEventListener("mouseover", () => {
+                cell.style.background = "#38bdf8"; // azul claro
+            });
+
+            // Evento mouseout → vuelve al color original
+            cell.addEventListener("mouseout", () => {
+                cell.style.background = "#1e293b"; // color original
+            });
+
+            // Evento click → número aleatorio
+            cell.addEventListener("click", () => {
+                const numero = Math.floor(Math.random() * 9) + 1; // 1 a 9
+                cell.textContent = numero;
+                mensaje.textContent = `¡El cuadro ahora tiene el número ${numero}!`;
+            });
+
+            tablero.appendChild(cell);
+        }
+
+        // Evento teclado → reiniciar con tecla R
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "r" || e.key === "R") {
+                const celdas = document.querySelectorAll(".cell");
+                celdas.forEach(c => c.textContent = ""); // vaciar cuadros
+                mensaje.textContent = "¡Tablero reiniciado!";
+            }
+        });
+    </script>
+</body>
+
+</html>
