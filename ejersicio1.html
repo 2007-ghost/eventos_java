@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Triqui (click)</title>
+  <style>
+    body {
+      font-family: Segoe UI, Roboto, Arial;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      margin: 0;
+      padding: 24px;
+    }
+    h1 {
+      text-align: center
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 8px;
+      justify-content: center;
+      margin: 18px auto
+    }
+    .cell {
+      background: #fff;
+      color: #000;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      font-weight: 800;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none
+    }
+    .cell:hover {
+      filter: brightness(.97)
+    }
+    .winner {
+      text-align: center;
+      margin-top: 12px;
+      font-weight: 700;
+      color: #0b1220;
+      background: #fff3;
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 8px
+    }
+    .explain {
+      max-width: 900px;
+      margin: 22px auto;
+      background: rgba(0, 0, 0, .25);
+      padding: 14px;
+      border-radius: 10px
+    }
+    pre {
+      background: #0b1220;
+      color: #e6eef8;
+      padding: 10px;
+      border-radius: 8px;
+      overflow: auto
+    }
+
+</style>
+</head>
+<body>
+  <h1>Triqui — clic para jugar</h1>
+  <div class="board" id="board"></div>
+  <div style="text-align:center">
+    <div id="winner" class="winner" aria-live="polite"></div>
+  </div>
+  <script>
+    const board = document.getElementById('board');
+    const winnerDisplay = document.getElementById('winner');
+    let currentPlayer = 'X';
+    let gameOver = false;
+
+    for (let i = 0; i < 9; i++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      board.appendChild(cell);
+      cell.addEventListener("click", ()=> {
+        if (cell.textContent=== "" && !gameOver){
+          cell.textContent = currentPlayer;
+          checkWinner();
+          currentPlayer = currentPlayer === "X" ? "O" : "X"
+;        }
+      })
+      }
+      const winPatterns = [
+  [0,1,2], [3,4,5], [6,7,8], // filas
+  [0,3,6], [1,4,7], [2,5,8], // columnas
+  [0,4,8], [2,4,6]           // diagonales
+];
+function checkWinner() {
+  const cells = document.querySelectorAll(".cell");
+  const winPatterns = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+  ];
+
+  for (let pattern of winPatterns) {
+    const [a, b, c] = pattern;
+    if (
+      cells[a].textContent &&
+      cells[a].textContent === cells[b].textContent &&
+      cells[a].textContent === cells[c].textContent
+    ) {
+      winnerDisplay.textContent = `¡Jugador ${cells[a].textContent} gana!`;
+      gameOver = true;
+      return;
+    }
+  }
+}
+  </script>
+</body>
+
+
+</html>

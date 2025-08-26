@@ -5,7 +5,9 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+a{
+  color:#f4f4f4 ;
+}
 body {
   background: #f9f9f9;
   color: #333;
