@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Intro - Evento Teclas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: #fff;
+        }
+
+        h1 {
+            color: #facc15;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+
+        p {
+            margin: 0 0 20px;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+        }
+
+        #output {
+            background: #ffffff;
+            color: #1e293b;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            margin-top: 15px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #output:hover {
+            transform: scale(1.05);
+        }
+
+        .hint {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #f1f5f9;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ejercicio: Evento de Teclas</h1>
+    <p>👉 Presiona cualquier tecla y verás cuál fue detectada.</p>
+
+    <div id="output">Presiona una tecla...</div>
+    <p class="hint">(Prueba con letras, números o la barra espaciadora)</p>
+
+    <script>
+        const output = document.getElementById("output");
+
+        // Detectar cuando se presiona una tecla
+        document.addEventListener("keydown", (evento) => {
+            output.textContent = "Tecla presionada: " + evento.key;
+        });
+    </script>
+</body>
+
+</html>

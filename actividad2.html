@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de Memoria</title>
+    <title>Mini Juego de Memoria</title>
     <style>
         body {
             font-family: Arial;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             background: #0072ff;
             color: #fff;
@@ -18,98 +19,61 @@
 
         .board {
             display: grid;
-            grid-template-columns: repeat(4, 80px);
+            grid-template-columns: repeat(4, 70px);
             gap: 10px;
         }
 
         .card {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             display: flex;
             justify-content: center;
             align-items: center;
             background: #00c6ff;
-            font-size: 2em;
+            font-size: 1.8em;
             cursor: pointer;
-            border-radius: 8px;
-        }
-
-        .hidden {
-            background: #555;
+            border-radius: 6px;
             color: transparent;
-            cursor: pointer;
+            /* ocultas al inicio */
         }
-
-        #status {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 1.2em;
+        .card.show {
+            color: #000;
+            /* muestra el símbolo */
+            background: #fff;
         }
     </style>
 </head>
-
 <body>
-
-    <div>
-        <div class="board" id="board"></div>
-        <div id="status"></div>
-    </div>
-
+    <h2>Mini Juego de Memoria</h2>
+    <div class="board" id="board"></div>
     <script>
         const board = document.getElementById("board");
-        const statusDiv = document.getElementById("status");
-
-        // Pares de cartas (duplicamos y mezclamos)
         let cards = ["🍎", "🍎", "🍌", "🍌", "🍇", "🍇", "🍒", "🍒"];
-        cards = cards.sort(() => Math.random() - 0.5);
-
-        let firstCard = null;
-        let secondCard = null;
-        let lock = false;
-        let matches = 0;
-
-        // Crear las cartas en el tablero
-        cards.forEach((symbol, index) => {
+        cards.sort(() => Math.random() - 0.5);
+        let first = null;
+        cards.forEach(symbol => {
             const card = document.createElement("div");
-            card.classList.add("card", "hidden");
-            card.dataset.symbol = symbol;
-            card.dataset.index = index;
+            card.classList.add("card");
             card.textContent = symbol;
             board.appendChild(card);
-
             card.addEventListener("click", () => {
-                if (lock || !card.classList.contains("hidden")) return;
-
-                card.classList.remove("hidden");
-
-                if (!firstCard) {
-                    firstCard = card;
+                card.classList.add("show");
+                if (!first) {
+                    first = card;
                 } else {
-                    secondCard = card;
-                    lock = true;
-
-                    if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
-                        matches++;
-                        firstCard = null;
-                        secondCard = null;
-                        lock = false;
-                        if (matches === cards.length / 2) {
-                            statusDiv.textContent = "¡Ganaste! 🎉";
-                        }
-                    } else {
+                    if (first.textContent !== card.textContent) {
                         setTimeout(() => {
-                            firstCard.classList.add("hidden");
-                            secondCard.classList.add("hidden");
-                            firstCard = null;
-                            secondCard = null;
-                            lock = false;
-                        }, 800);
+                            first.classList.remove("show");
+                            card.classList.remove("show");
+                            first = null;
+                        }, 600);
+                    } else {
+                        first = null; // pareja correcta, se queda descubierta
                     }
                 }
             });
         });
     </script>
-
 </body>
 
 </html>
