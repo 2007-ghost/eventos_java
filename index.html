@@ -44,17 +44,17 @@
   <header>
     <h1>Guía Completa de Eventos en JavaScript</h1>
     <p>Aprendizaje paso a paso con actividades, ejercicios y examen final.</p>
-      <a href="ejemplos.html">Ejemplos</a>
+    <a href="ejemplos.html">Ejemplos</a>
 
-      <a href="explicacion.html">Explicación</a>
+    <a href="explicacion.html">Explicación</a>
 
-      <a href="practica1.html">Práctica 1</a>
-      <a href="practica2.html">Práctica 2</a>
+    <a href="practica1.html">Práctica 1</a>
+    <a href="practica2.html">Práctica 2</a>
 
-      <a href="actividad1.html">Actividad 1</a>
-      <a href="actividad2.html">Actividad 2</a>
+    <a href="actividad1.html">Actividad 1</a>
+    <a href="actividad2.html">Actividad 2</a>
 
-      <a href="examen.html">Examen</a>
+    <a href="examen.html">Examen</a>
 
   </header>
 
@@ -70,10 +70,12 @@
       <p>Existen diferentes categorías de eventos según la interacción. Aquí tienes las principales:</p>
       <ul>
         <li><strong>Eventos de ratón:</strong> <code>click</code>, <code>dblclick</code>, <code>mouseover</code>,
-          <code>mouseout</code>, <code>mousemove</code></li>
+          <code>mouseout</code>, <code>mousemove</code>
+        </li>
         <li><strong>Eventos de teclado:</strong> <code>keydown</code>, <code>keyup</code>, <code>keypress</code></li>
         <li><strong>Eventos de formulario:</strong> <code>submit</code>, <code>change</code>, <code>input</code>,
-          <code>blur</code>, <code>focus</code></li>
+          <code>blur</code>, <code>focus</code>
+        </li>
         <li><strong>Eventos de carga:</strong> <code>load</code>, <code>DOMContentLoaded</code></li>
         <li><strong>Eventos de ventana:</strong> <code>resize</code>, <code>scroll</code></li>
       </ul>
@@ -85,7 +87,8 @@
 
       <h3>Paso 1: Seleccionar el Elemento</h3>
       <p>Primero, debes obtener una referencia al elemento HTML que será el "blanco" del evento. Usamos
-        <code>document.getElementById()</code>, que es el método más directo.</p>
+        <code>document.getElementById()</code>, que es el método más directo.
+      </p>
       <div class="paso">
         <pre><code>// SINTAXIS:
 const nombreVariable = document.getElementById("id-del-elemento");
@@ -114,7 +117,8 @@ miBoton.addEventListener('click', miFuncionDeEvento);</code></pre>
           <li><strong><code>.addEventListener()</code></strong>: El método que "escucha" el evento. Es un método moderno
             y flexible.</li>
           <li><strong><code>'click'</code></strong>: El tipo de evento que vas a escuchar. Siempre es un
-            <strong>string</strong>.</li>
+            <strong>string</strong>.
+          </li>
           <li><strong><code>miFuncionDeEvento</code></strong>: El nombre de la función que se ejecutará cuando el evento
             ocurra.</li>
         </ul>
@@ -178,110 +182,7 @@ function miFuncionDeEvento(e) {
         console.log('---------------------------');
       });
     </script>
-
-    <section class="actividad">
-      <h2>📝 Actividades de Práctica</h2>
-      <p>
-        Estas actividades te permiten aplicar la teoría aprendida. Puedes realizarlas en un archivo separado para
-        organizar tu código.
-      </p>
-      <ol>
-        <li>Crea un botón que cambie el color de fondo al hacer clic.</li>
-        <li>Muestra un mensaje en consola cuando el usuario presione una tecla.</li>
-        <li>Haz un formulario con nombre y correo que valide si los campos están vacíos antes de enviar.</li>
-        <li>Crea un div que cambie de color al pasar el ratón encima y regrese al original al quitarlo.</li>
-        <li>Implementa un contador que aumente al presionar un botón y disminuya al presionar otro.</li>
-      </ol>
-    </section>
-
-    <section class="ejercicios">
-      <h2>⚡ Ejercicios para reforzar</h2>
-      <p>
-        Los siguientes ejercicios requieren combinar múltiples conceptos de eventos para crear una funcionalidad más
-        compleja.
-      </p>
-      <ul>
-        <li>Detecta cuándo el usuario hace doble clic sobre una imagen.</li>
-        <li>Haz que al escribir en un input, se muestre en tiempo real el texto en un párrafo.</li>
-        <li>Crea un botón que, al hacer clic, agregue un nuevo ítem a una lista.</li>
-        <li>Detecta cuándo la ventana cambia de tamaño y muestra las nuevas dimensiones.</li>
-      </ul>
-    </section>
-
-    <section class="examen">
-      <h2>📑 Examen Final Integrador</h2>
-      <p>
-        Este examen evalúa tanto el conocimiento teórico como la capacidad práctica para integrar eventos en una mini
-        aplicación.
-      </p>
-      <h3>Parte A – Preguntas Teóricas</h3>
-      <ol>
-        <li>Explica qué es un evento en JavaScript y por qué es importante.</li>
-        <li>¿Qué ventajas tiene <code>addEventListener</code> frente a usar <code>onclick</code> directamente?</li>
-        <li>Menciona tres eventos del teclado y en qué situación los usarías.</li>
-        <li>¿Cuál es la diferencia entre <code>onchange</code> y <code>oninput</code>?</li>
-        <li>¿Qué significa “escuchar un evento” en JavaScript?</li>
-      </ol>
-      <h3>Parte B – Ejercicio Práctico</h3>
-      <p>Crea una mini aplicación que cumpla con:</p>
-      <ul>
-        <li><strong>Encabezado dinámico:</strong> Cambia el texto cuando el usuario pasa y quita el mouse.</li>
-        <li><strong>Contador con teclado:</strong> Aumenta con flecha arriba, disminuye con flecha abajo.</li>
-        <li><strong>Formulario validado:</strong> Nombre obligatorio y edad mayor a 0.</li>
-        <li><strong>Cambio de tema:</strong> Botón que alterne entre modo claro y oscuro.</li>
-      </ul>
-      <h3>📊 Rúbrica de Evaluación</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Criterio</th>
-            <th>Excelente (5)</th>
-            <th>Bueno (4)</th>
-            <th>Aceptable (3)</th>
-            <th>Insuficiente (1-2)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Eventos de mouse</td>
-            <td>Correctos y creativos</td>
-            <td>Funciona con detalles</td>
-            <td>Funciona parcialmente</td>
-            <td>No implementa</td>
-          </tr>
-          <tr>
-            <td>Eventos de teclado</td>
-            <td>Correctos y útiles</td>
-            <td>Funciona con errores leves</td>
-            <td>Limitado</td>
-            <td>No funciona</td>
-          </tr>
-          <tr>
-            <td>Eventos de formulario</td>
-            <td>Validación completa</td>
-            <td>Aceptable</td>
-            <td>Parcial</td>
-            <td>Sin validación</td>
-          </tr>
-          <tr>
-            <td>Uso de addEventListener</td>
-            <td>Usado en todos los casos</td>
-            <td>Usado en la mayoría</td>
-            <td>Pocos casos</td>
-            <td>No usado</td>
-          </tr>
-          <tr>
-            <td>Estilo y presentación</td>
-            <td>Bien organizado</td>
-            <td>Presentable</td>
-            <td>Básico</td>
-            <td>Desordenado</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
   </main>
-
   <footer>
     <p>Guía creada para aprender <strong>Eventos en JavaScript</strong> – Con teoría, práctica y evaluación.</p>
   </footer>

@@ -1,72 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Demos de Eventos en JavaScript — Explicado paso a paso</title>
   <style>
-    :root{
-      --bg1:#00c6ff; --bg2:#0072ff;
-      --panel: rgba(0,0,0,.35);
-      --text: #fff; --muted:#e2e8f0;
-      --code-bg:#0f172a; --card:#1e293b;
-      --accent:#38bdf8;
+    :root {
+      --bg1: #00c6ff;
+      --bg2: #0072ff;
+      --panel: rgba(0, 0, 0, .35);
+      --text: #fff;
+      --muted: #e2e8f0;
+      --code-bg: #0f172a;
+      --card: #1e293b;
+      --accent: #38bdf8;
     }
-    *{box-sizing:border-box}
-    body{
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to right, var(--bg1), var(--bg2));
       color: var(--text);
-      margin: 0; padding: 20px;
+      margin: 0;
+      padding: 20px;
     }
-    h1, h2{ text-align:center; margin: 10px 0 14px }
-    .section{
-      margin: 40px auto; padding: 20px;
-      border-radius: 15px; background: var(--panel);
-      max-width: 1000px; box-shadow: 0 4px 15px rgba(0,0,0,.3);
+
+    h1,
+    h2 {
+      text-align: center;
+      margin: 10px 0 14px
     }
-    .board{
-      display: grid; grid-template-columns: repeat(3, 100px);
-      grid-template-rows: repeat(3, 100px); gap: 6px;
-      justify-content: center; margin: 18px auto;
+
+    .section {
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 15px;
+      background: var(--panel);
+      max-width: 1000px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, .3);
     }
-    .cell,.puzzle-cell{
-      background:#fff; color:#000; display:flex;
-      justify-content:center; align-items:center;
-      font-size:2rem; font-weight:700; cursor:pointer;
-      border-radius:12px; transition: background .25s;
-      user-select:none;
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 6px;
+      justify-content: center;
+      margin: 18px auto;
     }
-    .cell:hover,.puzzle-cell:hover{ background:#dbeafe }
-    .winner{ text-align:center; font-size:1.25rem; font-weight:800; margin-top:8px }
+
+    .cell,
+    .puzzle-cell {
+      background: #fff;
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: background .25s;
+      user-select: none;
+    }
+
+    .cell:hover,
+    .puzzle-cell:hover {
+      background: #dbeafe
+    }
+
+    .winner {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-top: 8px
+    }
 
     /* Bloques de explicación */
-    .explanation{
+    .explanation {
       background: var(--card);
-      padding: 18px; border-radius: 12px; margin: 16px auto 0;
+      padding: 18px;
+      border-radius: 12px;
+      margin: 16px auto 0;
     }
-    .explanation h3{ color: var(--accent); margin-top: 10px }
-    .explanation p{ color: var(--muted) }
-    pre{
-      background: var(--code-bg); color:#e5e7eb;
-      padding: 12px; border-radius: 10px; overflow:auto;
+
+    .explanation h3 {
+      color: var(--accent);
+      margin-top: 10px
     }
-    code{ background: rgba(255,255,255,.08); padding: 2px 6px; border-radius:6px }
+
+    .explanation p {
+      color: var(--muted)
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: #e5e7eb;
+      padding: 12px;
+      border-radius: 10px;
+      overflow: auto;
+    }
+
+    code {
+      background: rgba(255, 255, 255, .08);
+      padding: 2px 6px;
+      border-radius: 6px
+    }
 
     /* Flechas de scroll */
-    .scroll-arrows{
-      position: fixed; right: 20px; bottom: 20px;
-      display:flex; flex-direction:column; gap:10px;
-      opacity:0; transition: opacity .35s ease;
-      pointer-events:none; z-index: 9999;
+    .scroll-arrows {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+      z-index: 9999;
     }
-    .arrow{
-      background:#fff; color:#000; width:44px; height:44px;
-      display:grid; place-items:center; border-radius:50%;
-      font-size:1.5rem; box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+    .arrow {
+      background: #fff;
+      color: #000;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .35);
     }
   </style>
 </head>
+
 <body>
 
   <h1>Ejercicios de Eventos en JavaScript (con explicaciones)</h1>
@@ -248,9 +320,9 @@ for (let i = 0; i &lt; 9; i++) {
     function checkWinner() {
       const cells = document.querySelectorAll(".cell");
       const winPatterns = [
-        [0,1,2], [3,4,5], [6,7,8],
-        [0,3,6], [1,4,7], [2,5,8],
-        [0,4,8], [2,4,6]
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
       ];
 
       for (let pattern of winPatterns) {
@@ -269,7 +341,7 @@ for (let i = 0; i &lt; 9; i++) {
 
     /* ===== EJERCICIO 2: ROMPECABEZAS (mover vacío con flechas) ===== */
     const puzzle = document.getElementById("puzzle");
-    let pieces = [1,2,3,4,5,6,7,8,""]; // 8 casillas ocupadas + 1 libre
+    let pieces = [1, 2, 3, 4, 5, 6, 7, 8, ""]; // 8 casillas ocupadas + 1 libre
 
     function shuffle(arr) { arr.sort(() => Math.random() - 0.5); }
     shuffle(pieces);
@@ -286,9 +358,9 @@ for (let i = 0; i &lt; 9; i++) {
     renderPuzzle();
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowUp")    mover("up");
-      if (e.key === "ArrowDown")  mover("down");
-      if (e.key === "ArrowLeft")  mover("left");
+      if (e.key === "ArrowUp") mover("up");
+      if (e.key === "ArrowDown") mover("down");
+      if (e.key === "ArrowLeft") mover("left");
       if (e.key === "ArrowRight") mover("right");
     });
 
@@ -298,9 +370,9 @@ for (let i = 0; i &lt; 9; i++) {
       const col = emptyIndex % 3;
 
       let swapIndex = null;
-      if (direction === "up"    && row < 2) swapIndex = emptyIndex + 3; // traer ficha de abajo
-      if (direction === "down"  && row > 0) swapIndex = emptyIndex - 3;
-      if (direction === "left"  && col < 2) swapIndex = emptyIndex + 1;
+      if (direction === "up" && row < 2) swapIndex = emptyIndex + 3; // traer ficha de abajo
+      if (direction === "down" && row > 0) swapIndex = emptyIndex - 3;
+      if (direction === "left" && col < 2) swapIndex = emptyIndex + 1;
       if (direction === "right" && col > 0) swapIndex = emptyIndex - 1;
 
       if (swapIndex !== null) {
@@ -310,4 +382,5 @@ for (let i = 0; i &lt; 9; i++) {
     }
   </script>
 </body>
+
 </html>

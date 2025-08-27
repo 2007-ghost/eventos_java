@@ -5,12 +5,14 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-a{
-  color:#f4f4f4 ;
+
+a {
+  color: #f4f4f4;
   text-decoration: none;
   font-weight: bold;
   margin-right: 16px;
 }
+
 body {
   background: #f9f9f9;
   color: #333;
@@ -42,7 +44,7 @@ section {
   margin: 20px 0;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 section h2 {
@@ -50,29 +52,31 @@ section h2 {
   margin-bottom: 10px;
 }
 
-section ul, section ol {
+section ul,
+section ol {
   margin-left: 20px;
   margin-top: 10px;
 }
 
 pre {
   /* Fondo y color de texto */
-  background: #282c34; 
-  color: #abb2bf;     
+  background: #282c34;
+  color: #abb2bf;
 
   /* Espaciado y bordes */
   padding: 15px;
-  border-radius: 8px; 
-  border: 1px solid #3e4451; 
-  overflow-x: auto; 
+  border-radius: 8px;
+  border: 1px solid #3e4451;
+  overflow-x: auto;
   margin: 15px 0;
-  
+
   /* Tipo de fuente */
-  font-family: 'Fira Code', 'Roboto Mono', monospace; 
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
   font-size: 0.9em;
   line-height: 1.6;
-  white-space: pre-wrap; 
+  white-space: pre-wrap;
 }
+
 /* pre {
   background: #f4f4f4;
   padding: 10px;
@@ -88,11 +92,14 @@ table {
   margin-top: 15px;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #ccc;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: center;
 }
