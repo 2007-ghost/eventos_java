@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guía de Eventos en JavaScript</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Estilos adicionales para la demostración */
+    /* --- ESTILOS EXTRA PARA ESTA PÁGINA --- */
     .paso {
       padding: 10px;
       margin-bottom: 20px;
@@ -15,7 +14,6 @@
       border-radius: 5px;
       background-color: #f9f9f9;
     }
-
     #miBoton {
       padding: 10px 20px;
       font-size: 1em;
@@ -26,11 +24,7 @@
       color: white;
       transition: background-color 0.3s;
     }
-
-    #miBoton:hover {
-      background-color: #2980b9;
-    }
-
+    #miBoton:hover { background-color: #2980b9; }
     #demo-display {
       font-size: 1.2em;
       font-weight: bold;
@@ -41,151 +35,139 @@
 </head>
 
 <body>
+  <!-- ===== HEADER PRINCIPAL ===== -->
   <header>
     <h1>Guía Completa de Eventos en JavaScript</h1>
     <p>Aprendizaje paso a paso con actividades, ejercicios y examen final.</p>
-    <a href="ejemplos.html">Ejemplos</a>
-
-    <a href="explicacion.html">Explicación</a>
-
-    <a href="practica1.html">Práctica 1</a>
-    <a href="practica2.html">Práctica 2</a>
-
-    <a href="actividad1.html">Actividad 1</a>
-    <a href="actividad2.html">Actividad 2</a>
-
-    <a href="examen.html">Examen</a>
-
+    <nav>
+      <a href="ejemplos.html">Ejemplos</a>
+      <a href="explicacion.html">Explicación</a>
+      <a href="practica1.html">Práctica 1</a>
+      <a href="practica2.html">Práctica 2</a>
+      <a href="actividad1.html">Actividad 1</a>
+      <a href="actividad2.html">Actividad 2</a>
+      <a href="examen.html">Examen</a>
+    </nav>
   </header>
 
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
   <main>
-    <section class="teoria">
-      <h2>📌 ¿Qué es un Evento en JavaScript?</h2>
-      <p>Un evento es cualquier interacción del usuario o del sistema con la página web, como un clic, presionar una
-        tecla, mover el ratón o enviar un formulario. Con JavaScript podemos "escuchar" y responder a esos eventos.</p>
+    <section>
+      <h2>¿Qué es un evento?</h2>
+      <p>Un evento es una señal que emite el navegador cuando algo ocurre en la página.</p>
+      <ul>
+        <li>El usuario hace clic en un botón.</li>
+        <li>Se escribe texto en un input.</li>
+        <li>Se envía un formulario.</li>
+        <li>La página terminó de cargar.</li>
+        <li>La ventana cambia de tamaño.</li>
+      </ul>
+      <p><em>Es como si el navegador dijera: “Oye, pasó algo, ¿quieres reaccionar a esto?”</em></p>
     </section>
 
-    <section class="teoria">
+    <section>
+      <h2>¿Por qué existen los eventos?</h2>
+      <ul>
+        <li>Porque las páginas web no son estáticas, son interactivas.</li>
+        <li>Permiten responder a las acciones del usuario (clic, teclado, mouse, scroll).</li>
+        <li>Permiten detectar cambios en el sistema (carga de archivos, animaciones, red).</li>
+        <li>Son la base de toda aplicación web dinámica.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>¿Cómo funcionan?</h2>
+      <ol>
+        <li>Se genera un evento (ejemplo: clic).</li>
+        <li>El navegador lo detecta y lo manda al elemento correspondiente.</li>
+        <li>Tu código puede escucharlo con un <strong>listener</strong>.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Métodos para implementar eventos</h2>
+      <p><strong>En línea (no recomendado):</strong></p>
+      <pre>&lt;button onclick="alert('Hola!')"&gt;Haz clic&lt;/button&gt;</pre>
+
+      <p><strong>Con <code>addEventListener</code> (recomendado):</strong></p>
+      <pre>
+const btn = document.querySelector("#miBoton");
+btn.addEventListener("click", () => alert("Hola!"));
+      </pre>
+    </section>
+
+    <section>
+      <h2>Buenas prácticas</h2>
+      <ul>
+        <li>Usar <code>addEventListener</code> siempre.</li>
+        <li>Separar la lógica de HTML.</li>
+        <li>Delegar eventos en contenedores para optimizar.</li>
+      </ul>
+    </section>
+
+    <section>
       <h2>📌 Tipos de Eventos</h2>
-      <p>Existen diferentes categorías de eventos según la interacción. Aquí tienes las principales:</p>
       <ul>
-        <li><strong>Eventos de ratón:</strong> <code>click</code>, <code>dblclick</code>, <code>mouseover</code>,
-          <code>mouseout</code>, <code>mousemove</code>
-        </li>
-        <li><strong>Eventos de teclado:</strong> <code>keydown</code>, <code>keyup</code>, <code>keypress</code></li>
-        <li><strong>Eventos de formulario:</strong> <code>submit</code>, <code>change</code>, <code>input</code>,
-          <code>blur</code>, <code>focus</code>
-        </li>
-        <li><strong>Eventos de carga:</strong> <code>load</code>, <code>DOMContentLoaded</code></li>
-        <li><strong>Eventos de ventana:</strong> <code>resize</code>, <code>scroll</code></li>
+        <li><strong>Ratón:</strong> click, dblclick, mouseover, mouseout.</li>
+        <li><strong>Teclado:</strong> keydown, keyup, keypress.</li>
+        <li><strong>Formulario:</strong> submit, change, input.</li>
+        <li><strong>Carga:</strong> load, DOMContentLoaded.</li>
+        <li><strong>Ventana:</strong> resize, scroll.</li>
       </ul>
     </section>
 
-    <section class="teoria">
+    <section>
       <h2>🚀 Creación de un Evento: Paso a Paso</h2>
-      <p>Para que un evento funcione, debes seguir 3 pasos esenciales. Los explicaremos con un ejemplo práctico.</p>
-
       <h3>Paso 1: Seleccionar el Elemento</h3>
-      <p>Primero, debes obtener una referencia al elemento HTML que será el "blanco" del evento. Usamos
-        <code>document.getElementById()</code>, que es el método más directo.
-      </p>
-      <div class="paso">
-        <pre><code>// SINTAXIS:
-const nombreVariable = document.getElementById("id-del-elemento");
-const miBoton = document.getElementById('miBoton');</code></pre>
-        <ul>
-          <li><strong><code>const</code></strong>: Declara una variable cuyo valor no cambiará. Es la forma más segura
-            de guardar tu elemento.</li>
-          <li><strong><code>miBoton</code></strong>: Es el nombre que le das a tu variable. Úsalo para referirte al
-            elemento en el código.</li>
-          <li><strong><code>document</code></strong>: Representa toda la página web. Es el punto de partida.</li>
-          <li><strong><code>.getElementById()</code></strong>: El método que busca el elemento por su <strong>atributo
-              <code>id</code> único</strong>.</li>
-        </ul>
-      </div>
+      <div class="paso"><pre><code>
+const miBoton = document.getElementById('miBoton');
+      </code></pre></div>
 
-      <h3>Paso 2: El Escuchador (<code>addEventListener</code>)</h3>
-      <p>Con el elemento seleccionado, le "adjuntas" un escuchador. <code>addEventListener()</code> es el método
-        estándar que le dice al navegador que espere a que ocurra un evento específico en el elemento.</p>
-      <div class="paso">
-        <pre><code>// SINTAXIS:
-elemento.addEventListener("evento", funcionAEjecutar);
-miBoton.addEventListener('click', miFuncionDeEvento);</code></pre>
-        <ul>
-          <li><strong><code>miBoton</code></strong>: La variable que contiene la referencia al elemento que
-            seleccionaste.</li>
-          <li><strong><code>.addEventListener()</code></strong>: El método que "escucha" el evento. Es un método moderno
-            y flexible.</li>
-          <li><strong><code>'click'</code></strong>: El tipo de evento que vas a escuchar. Siempre es un
-            <strong>string</strong>.
-          </li>
-          <li><strong><code>miFuncionDeEvento</code></strong>: El nombre de la función que se ejecutará cuando el evento
-            ocurra.</li>
-        </ul>
-      </div>
+      <h3>Paso 2: El Escuchador</h3>
+      <div class="paso"><pre><code>
+miBoton.addEventListener('click', miFuncion);
+      </code></pre></div>
 
-      <h3>Paso 3: La Función (La Reacción)</h3>
-      <p>Finalmente, defines la lógica que se ejecutará cuando el evento ocurra. Esta es la función que pasaste como
-        segundo argumento al escuchador. Dentro de esta función, puedes acceder al <strong>objeto de evento</strong>
-        (comúnmente llamado <code>e</code>).</p>
-      <div class="paso">
-        <pre><code>// SINTAXIS: 
-function nombreFuncion(e) { ... }
-function miFuncionDeEvento(e) {
-
-  // El código de la reacción va aquí
+      <h3>Paso 3: La Función</h3>
+      <div class="paso"><pre><code>
+function miFuncion(e) {
   console.log("¡Evento activado!");
-  console.log("Objeto de evento:", e);
-}</code></pre>
-        <ul>
-          <li><strong><code>function</code></strong>: La palabra clave para definir una función.</li>
-          <li><strong><code>miFuncionDeEvento</code></strong>: El nombre que le das a tu función.</li>
-          <li><strong><code>(e)</code></strong>: El parámetro que recibe el <strong>objeto de evento</strong>. Es
-            opcional, pero muy útil para acceder a la información del evento.</li>
-        </ul>
-      </div>
+}
+      </code></pre></div>
 
-      <p><strong>¡Veámoslo en acción!</strong> Haz clic en el botón de abajo y observa la consola de tu navegador (F12).
-      </p>
-      <button id="miBoton">Haz Clic Aquí</button>
-      <p id="demo-display"></p>
+      <div class="ejemplo">
+        <button id="miBoton">Haz Clic Aquí</button>
+        <p id="demo-display"></p>
+      </div>
     </section>
 
-    <section class="teoria">
-      <h2>🔎 El Objeto de Evento (<code>e</code>)</h2>
-      <p>El objeto <code>e</code> es un objeto que se crea automáticamente al ocurrir un evento. Contiene información
-        vital sobre el suceso. Es como un reporte instantáneo que te dice qué pasó y dónde.</p>
+    <section>
+      <h2>🔎 El Objeto de Evento (e)</h2>
       <ul>
-        <li><strong><code>e.target</code></strong>: La propiedad más importante. Identifica <strong>exactamente el
-            elemento</strong> en el que ocurrió el evento. Esto es vital para la delegación.</li>
-        <li><strong><code>e.preventDefault()</code></strong>: Un método que detiene el comportamiento por defecto de un
-          evento (ej. evita que un formulario se envíe).</li>
-        <li><strong><code>e.stopPropagation()</code></strong>: Detiene la propagación del evento a los elementos padres.
-        </li>
-        <li><strong><code>e.type</code></strong>: Devuelve el tipo de evento que se disparó (ej. 'click').</li>
+        <li><code>e.target</code>: Elemento en el que ocurrió el evento.</li>
+        <li><code>e.preventDefault()</code>: Evita el comportamiento por defecto.</li>
+        <li><code>e.stopPropagation()</code>: Detiene la propagación.</li>
+        <li><code>e.type</code>: Tipo de evento disparado.</li>
       </ul>
     </section>
-
-    <script>
-      // Unimos todos los pasos en este script
-      const miBoton = document.getElementById('miBoton');
-      const demoDisplay = document.getElementById('demo-display');
-
-      miBoton.addEventListener('click', function (e) {
-        // Actualiza el texto en la página
-        demoDisplay.textContent = '¡Evento activado!';
-
-        // Muestra la información del objeto de evento en la consola
-        console.log('--- Objeto de Evento (e) ---');
-        console.log('Tipo:', e.type);
-        console.log('Elemento objetivo:', e.target);
-        console.log('---------------------------');
-      });
-    </script>
   </main>
+
+  <!-- ===== FOOTER ===== -->
   <footer>
     <p>Guía creada para aprender <strong>Eventos en JavaScript</strong> – Con teoría, práctica y evaluación.</p>
   </footer>
-</body>
 
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    const miBoton = document.getElementById('miBoton');
+    const demoDisplay = document.getElementById('demo-display');
+
+    miBoton.addEventListener('click', function (e) {
+      demoDisplay.textContent = '¡Evento activado!';
+      console.log('Tipo:', e.type);
+      console.log('Elemento objetivo:', e.target);
+    });
+  </script>
+</body>
 </html>
+<!DOCTYPE html>
